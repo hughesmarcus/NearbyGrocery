@@ -24,6 +24,9 @@ class GroceryListAdapter(private val context: Context, private val data: List<Re
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.click(data[position], listener)
         holder.name.text = data[position].name
+        if (data[position].openingHours?.openNow == true) {
+            holder.opentime.text = "Open"
+        } else holder.opentime.text = "Closed"
 
 
 
@@ -41,11 +44,13 @@ class GroceryListAdapter(private val context: Context, private val data: List<Re
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         internal var name: TextView
+        internal var opentime: TextView
 
 
 
         init {
             name = itemView.findViewById<TextView>(R.id.name)
+            opentime = itemView.findViewById<TextView>(R.id.opentime)
 
 
         }

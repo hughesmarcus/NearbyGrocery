@@ -16,7 +16,7 @@ import retrofit2.http.Query
 /**
  * Created by Marcus on 8/15/2017.
  */
-class NetworkService @JvmOverloads constructor() {
+class NetworkService {
     /**
      * Method to return the API interface.
      * @return
@@ -48,6 +48,7 @@ class NetworkService @JvmOverloads constructor() {
                            @Query("type") type: String,
                            @Query("key") key:  String)
                 : Observable<PlaceResponse>
+
     }
     companion object {
 

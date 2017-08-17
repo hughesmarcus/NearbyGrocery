@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">NearbyGrocery</string>
+    <string name="Open">Open</string>
+    <string name="Closed">Closed</string>
 </resources>

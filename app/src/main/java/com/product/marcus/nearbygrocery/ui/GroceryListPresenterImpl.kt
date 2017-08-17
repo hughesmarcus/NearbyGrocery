@@ -20,14 +20,9 @@ import io.reactivex.schedulers.Schedulers
 /**
  * Created by Marcus on 8/15/2017.
  */
-class GroceryListPresenterImpl(private val view: GroceryListView,var rxLocation: RxLocation, var permission: RxPermissions, var service:NetworkService): GroceryListPresenter {
+class GroceryListPresenterImpl(private val view: GroceryListView, var rxLocation: RxLocation,
+                               var permission: RxPermissions, var service: NetworkService, var compositeDisposable: CompositeDisposable) : GroceryListPresenter {
 
-
-    protected var compositeDisposable: CompositeDisposable? = null
-
-    init {
-        this.compositeDisposable = CompositeDisposable()
-    }
 
     override fun getLocation(){
         permission
@@ -42,6 +37,7 @@ class GroceryListPresenterImpl(private val view: GroceryListView,var rxLocation:
                             .flatMap({ location -> rxLocation.geocoding().fromLocation(location).toObservable() })
                             .subscribe({ address ->
                                 Log.i("Main", address.latitude.toString())
+
                                 getGroceryLocations(address.latitude , address.longitude)
                             })
                 }
@@ -55,7 +51,7 @@ class GroceryListPresenterImpl(private val view: GroceryListView,var rxLocation:
        compositeDisposable!!.add(service.getAPI().getGroceryList(location,5000,"store","AIzaSyA2BaZ3ue7tBn0naz2SyMI_vrXvorFKtgw")
                .subscribeOn(Schedulers.computation())
                .observeOn(AndroidSchedulers.mainThread())
-               .subscribe({ PlaceResponse -> view.getGroceryListSuccess(PlaceResponse) }))
+               .subscribe({ PlaceResponse -> view.getGroceryListSuccess(PlaceResponse);Log.i("Mainpic", PlaceResponse.results!![0].icon) }))
 
    }
 

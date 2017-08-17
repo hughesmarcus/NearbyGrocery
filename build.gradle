@@ -8,12 +8,23 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'org.robolectric:robolectric-gradle-plugin:1.0.1'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
 }
-
+task createTestResources << {
+    def mockMakerFile = new File("$projectDir/src/test/resources/mockito-extensions/org.mockito.plugins.MockMaker")
+    if (System.env.MOCK_MAKER != null) {
+        logger.info("Using MockMaker ${System.env.MOCK_MAKER}")
+        mockMakerFile.parentFile.mkdirs()
+        mockMakerFile.createNewFile()
+        mockMakerFile.write(System.env.MOCK_MAKER)
+    } else {
+        logger.info("Using default MockMaker")
+    }
+}
 allprojects {
     repositories {
         jcenter()
@@ -23,3 +34,4 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
