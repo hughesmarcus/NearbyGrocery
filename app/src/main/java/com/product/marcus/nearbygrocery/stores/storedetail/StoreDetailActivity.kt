@@ -1,19 +1,18 @@
-package com.product.marcus.nearbygrocery.storedetail
+package com.product.marcus.nearbygrocery.stores.storedetail
 
 import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.BottomNavigationView
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import com.product.marcus.nearbygrocery.BaseActivity
 
 import com.product.marcus.nearbygrocery.R
 import com.product.marcus.nearbygrocery.models.Result
-import com.product.marcus.nearbygrocery.ui.GroceryListAdapter
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_store_detail.*
 
-class StoreDetailActivity : AppCompatActivity() {
+class StoreDetailActivity : BaseActivity() {
     lateinit var result: Result
     private lateinit var list: RecyclerView
     companion object {
@@ -31,6 +30,8 @@ class StoreDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_store_detail)
+        val navigation = findViewById(R.id.bottom_navigation) as? BottomNavigationView
+        navigation!!.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         list = findViewById(R.id.photo_list) as RecyclerView
 
         result = intent.getParcelableExtra(STORE)

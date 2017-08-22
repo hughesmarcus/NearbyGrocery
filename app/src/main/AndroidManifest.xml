@@ -18,14 +18,17 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyA2BaZ3ue7tBn0naz2SyMI_vrXvorFKtgw" />
 
-        <activity android:name=".ui.GroceryListActivity">
+        <activity android:name=".stores.storelist.StoreListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".storedetail.StoreDetailActivity"></activity>
+        <activity android:name="com.product.marcus.nearbygrocery.stores.storedetail.StoreDetailActivity" />
+        <activity
+            android:name=".BaseActivity"
+            android:label="@string/title_activity_base"></activity>
     </application>
 
 </manifest>

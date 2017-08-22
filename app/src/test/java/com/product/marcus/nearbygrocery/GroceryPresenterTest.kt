@@ -1,13 +1,10 @@
 package com.product.marcus.nearbygrocery
 
-import android.app.Application
-
 import com.patloew.rxlocation.RxLocation
 import com.product.marcus.nearbygrocery.models.PlaceResponse
-import com.product.marcus.nearbygrocery.models.Result
 import com.product.marcus.nearbygrocery.network.NetworkService
-import com.product.marcus.nearbygrocery.ui.GroceryListPresenterImpl
-import com.product.marcus.nearbygrocery.ui.GroceryListView
+import com.product.marcus.nearbygrocery.stores.storelist.StoreListPresenterImpl
+import com.product.marcus.nearbygrocery.stores.storelist.StoreListView
 import com.tbruyelle.rxpermissions2.RxPermissions
 
 import org.junit.Before
@@ -17,32 +14,20 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnitRunner
-import org.robolectric.RobolectricTestRunner
-import org.robolectric.annotation.Config
-import java.util.concurrent.Callable
 
-import io.reactivex.Observable
-import io.reactivex.Scheduler
 import io.reactivex.android.plugins.RxAndroidPlugins
-import io.reactivex.annotations.NonNull
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.functions.Function
 import io.reactivex.schedulers.Schedulers
-import okhttp3.mockwebserver.MockResponse
-import okhttp3.mockwebserver.MockWebServer
 import org.junit.Rule
-import retrofit2.Retrofit
 
-import org.mockito.ArgumentMatchers.anyDouble
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mockito.verify
-import org.mockito.Mockito.`when`
 
 @RunWith(MockitoJUnitRunner::class)
 class GroceryPresenterTest {
     @Mock
-    internal var view: GroceryListView? = null
+    internal var view: StoreListView? = null
     @Mock
     internal var service: NetworkService? = null
     @Mock
@@ -58,7 +43,7 @@ class GroceryPresenterTest {
 
     @get:Rule
     var trampolineSchedulerRule = TrampolineSchedulerRule()
-    private var presenter: GroceryListPresenterImpl? = null
+    private var presenter: StoreListPresenterImpl? = null
     @Before
     fun setup() {
 
@@ -69,7 +54,7 @@ class GroceryPresenterTest {
 
     @Test
     fun shouldFetchJokesWhenRequested() {
-        presenter = GroceryListPresenterImpl(view!!, location!!, permissions!!, service!!, compositeDisposable!!)
+        presenter = StoreListPresenterImpl(view!!, location!!, permissions!!, service!!, compositeDisposable!!)
         // when(api.getGroceryList(anyString(),anyInt(),anyString(),anyString())).thenReturn(Observable.just(response));
         presenter!!.getLocation()
         presenter!!.getGroceryLocations(31.1, 31.1)

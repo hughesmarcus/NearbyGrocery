@@ -1,4 +1,4 @@
-package com.product.marcus.nearbygrocery.storedetail
+package com.product.marcus.nearbygrocery.stores.storedetail
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -7,12 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import com.product.marcus.nearbygrocery.R
 import com.product.marcus.nearbygrocery.models.Result
-import com.product.marcus.nearbygrocery.ui.GroceryListAdapter
+import com.product.marcus.nearbygrocery.stores.storelist.StoreListAdapter
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_store_detail.*
 
 /**
  * Created by Marcus on 8/21/2017.
@@ -51,7 +49,7 @@ class PhotoAdapter(private val context: Context, private val data: Result) : Rec
         }
 
 
-        fun click(result: Result, listener: GroceryListAdapter.OnItemClickListener) {
+        fun click(result: Result, listener: StoreListAdapter.OnItemClickListener) {
             itemView.setOnClickListener { listener.onClick(result) }
         }
     }

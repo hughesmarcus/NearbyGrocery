@@ -2,4 +2,11 @@
     <string name="app_name">NearbyGrocery</string>
     <string name="Open">Open</string>
     <string name="Closed">Closed</string>
+    <string name="store_list">Stores</string>
+    <string name="grocery_list">Grocery List</string>
+    <string name="pantry">Pantry</string>
+    <string name="title_activity_base">BaseActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

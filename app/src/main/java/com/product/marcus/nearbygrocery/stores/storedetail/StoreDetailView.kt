@@ -1,4 +1,4 @@
-package com.product.marcus.nearbygrocery.storedetail
+package com.product.marcus.nearbygrocery.stores.storedetail
 
 /**
  * Created by Marcus on 8/16/2017.
