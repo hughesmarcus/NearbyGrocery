@@ -59,7 +59,7 @@ class GroceryPresenterTest {
     }
 
     @Test
-    fun shouldloadstores() {
+    fun shouldLoadStores() {
 
         whenever(service.getAPI()).thenReturn(api)
         whenever(service.getAPI().getGroceryList(anyString(), anyInt(), anyString(), anyString())).thenReturn(Observable.just(response))
@@ -69,7 +69,7 @@ class GroceryPresenterTest {
     }
 
     @Test
-    fun shouldloadLocation() {
+    fun shouldLoadLocation() {
         presenter.getLocation()
         verify(presenter.getGroceryLocations(ArgumentMatchers.anyDouble(), ArgumentMatchers.anyDouble()))
     }
