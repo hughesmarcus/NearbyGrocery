@@ -55,6 +55,9 @@ dependencies {
     androidTestCompile 'org.mockito:mockito-android:+'
     androidTestCompile 'org.hamcrest:hamcrest-library:+'
     annotationProcessor 'com.google.dagger:dagger-compiler:+'
+    testCompile 'org.testng:testng:6.9.6'
+    testCompile 'org.powermock:powermock:+'
+    testCompile 'org.powermock:powermock-module-junit4:+'
 }
 repositories {
     mavenCentral()

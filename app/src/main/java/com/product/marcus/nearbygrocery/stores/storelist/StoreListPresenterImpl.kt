@@ -18,8 +18,12 @@ import io.reactivex.schedulers.Schedulers
  * Created by Marcus on 8/15/2017.
  */
 class StoreListPresenterImpl(private val view: StoreListView, var rxLocation: RxLocation,
-                             var permission: RxPermissions, var service: NetworkService, var compositeDisposable: CompositeDisposable) : StoreListPresenter {
+                             var permission: RxPermissions, var service: NetworkService) : StoreListPresenter {
+    var compositeDisposable: CompositeDisposable? = null
 
+    init {
+        this.compositeDisposable = CompositeDisposable()
+    }
 
     override fun getLocation() {
         permission
@@ -44,6 +48,7 @@ class StoreListPresenterImpl(private val view: StoreListView, var rxLocation: Rx
     }
 
     override fun getGroceryLocations(lat: Double, lon: Double) {
+
         var location = lat.toString() + "," + lon.toString()
         compositeDisposable!!.add(service.getAPI().getGroceryList(location, 5000, "store", "AIzaSyA2BaZ3ue7tBn0naz2SyMI_vrXvorFKtgw")
                 .subscribeOn(Schedulers.computation())

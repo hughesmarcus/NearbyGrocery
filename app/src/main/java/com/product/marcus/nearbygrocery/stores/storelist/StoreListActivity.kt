@@ -38,7 +38,7 @@ class StoreListActivity : BaseActivity(), StoreListView {
         rxPermission = RxPermissions(this)
         rxLocation = RxLocation(this)
         service = NetworkService()
-        presenter = StoreListPresenterImpl(this, rxLocation, rxPermission, service, compositeDisposable)
+        presenter = StoreListPresenterImpl(this, rxLocation, rxPermission, service)
         presenter.getLocation()
         renderView()
         init()
