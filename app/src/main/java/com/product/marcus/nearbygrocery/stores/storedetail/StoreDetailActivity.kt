@@ -30,9 +30,9 @@ class StoreDetailActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_store_detail)
-        val navigation = findViewById(R.id.bottom_navigation) as? BottomNavigationView
+        val navigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         navigation!!.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-        list = findViewById(R.id.photo_list) as RecyclerView
+        list = findViewById<RecyclerView>(R.id.photo_list) as RecyclerView
 
         result = intent.getParcelableExtra(STORE)
         textView.text = result.name

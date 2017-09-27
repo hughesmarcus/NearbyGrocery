@@ -41,15 +41,7 @@ class NetworkService {
     /**
      * all the Service alls to use for the retrofit requests.
      */
-    interface PlacesApi {
-        @GET("maps/api/place/nearbysearch/json")
-        fun getGroceryList(@Query("location") location: String,
-                           @Query("radius") radius: Int,
-                           @Query("type") type: String,
-                           @Query("key") key:  String)
-                : Observable<PlaceResponse>
 
-    }
     companion object {
 
         private val baseUrl = "https://maps.googleapis.com/"

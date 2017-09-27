@@ -3,6 +3,7 @@ package com.product.marcus.nearbygrocery
 import com.patloew.rxlocation.RxLocation
 import com.product.marcus.nearbygrocery.models.PlaceResponse
 import com.product.marcus.nearbygrocery.network.NetworkService
+import com.product.marcus.nearbygrocery.network.PlacesApi
 import com.product.marcus.nearbygrocery.stores.storelist.StoreListPresenterImpl
 import com.product.marcus.nearbygrocery.stores.storelist.StoreListView
 import com.tbruyelle.rxpermissions2.RxPermissions
@@ -38,7 +39,7 @@ class GroceryPresenterTest {
     @Mock
     internal lateinit var response: PlaceResponse
     @Mock
-    internal lateinit var api: NetworkService.PlacesApi
+    internal lateinit var api: PlacesApi
 
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 

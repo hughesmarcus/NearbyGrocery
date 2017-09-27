@@ -32,7 +32,7 @@ class StoreListActivity : BaseActivity(), StoreListView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_store_list)
-        val navigation = findViewById(R.id.bottom_navigation) as? BottomNavigationView
+        val navigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         navigation!!.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         compositeDisposable = CompositeDisposable()
         rxPermission = RxPermissions(this)
@@ -46,12 +46,12 @@ class StoreListActivity : BaseActivity(), StoreListView {
     }
 
     fun renderView() {
-        list = findViewById(R.id.activity_stations_recyclerView) as RecyclerView
+        list = findViewById<RecyclerView>(R.id.activity_stations_recyclerView) as RecyclerView
         val layoutManager = LinearLayoutManager(this)
         val dividerItemDecoration = DividerItemDecoration(list.getContext(),
                 layoutManager.getOrientation())
         list.addItemDecoration(dividerItemDecoration)
-        progressBar = findViewById(R.id.activity_stations_progressBar) as ProgressBar
+        progressBar = findViewById<ProgressBar>(R.id.activity_stations_progressBar) as ProgressBar
     }
 
     fun init() {

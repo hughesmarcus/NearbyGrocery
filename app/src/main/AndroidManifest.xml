@@ -25,10 +25,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.product.marcus.nearbygrocery.stores.storedetail.StoreDetailActivity" />
+        <activity android:name=".stores.storedetail.StoreDetailActivity" />
         <activity
             android:name=".BaseActivity"
-            android:label="@string/title_activity_base"></activity>
+            android:label="@string/title_activity_base" />
+        <activity android:name=".GroceryList.list.GroceryListActivity" />
+        <activity android:name=".GroceryList.additem.EditItemActivity" />
+        <activity android:name=".Pantry.PantryListActivity"></activity>
     </application>
 
 </manifest>

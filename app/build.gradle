@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
 
 android {
     compileSdkVersion 26
@@ -12,13 +14,15 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    kapt {
+        generateStubs = true
     }
 }
 
@@ -46,6 +50,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'com.google.dagger:dagger:+'
     compile 'com.android.support:support-vector-drawable:26.+'
+    //testing
     testCompile 'junit:junit:4.12'
     testCompile 'com.nhaarman:mockito-kotlin:+'
     testCompile 'org.mockito:mockito-core:+'
@@ -56,8 +61,19 @@ dependencies {
     androidTestCompile 'org.hamcrest:hamcrest-library:+'
     annotationProcessor 'com.google.dagger:dagger-compiler:+'
     testCompile 'org.testng:testng:6.9.6'
-    testCompile 'org.powermock:powermock:+'
-    testCompile 'org.powermock:powermock-module-junit4:+'
+    compile 'com.squareup.okhttp3:okhttp:3.8.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.8.0'
+    androidTestCompile 'com.google.code.findbugs:jsr305:3.0.+'
+
+    kapt 'com.google.dagger:dagger-compiler:+'
+    provided 'org.glassfish:javax.annotation:10.0-b28'
+    //MemoryLeaks
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.2'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.2'
+    // Room
+    compile 'android.arch.persistence.room:runtime:1.0.0-alpha1'
+    compile 'android.arch.persistence.room:rxjava2:1.0.0-alpha1'
+    kapt "android.arch.persistence.room:compiler:1.0.0-alpha1"
 }
 repositories {
     mavenCentral()
