@@ -8,9 +8,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-/**
- * Created by Marcus on 9/27/2017.
- */
+
 class GroceryListPresenter @Inject constructor(val itemDao: ItemDao) {
 
     val compositeDisposable = CompositeDisposable()
@@ -28,7 +26,7 @@ class GroceryListPresenter @Inject constructor(val itemDao: ItemDao) {
         view = null
     }
 
-    fun loadItems() {
+    private fun loadItems() {
         compositeDisposable.add(itemDao.getAllItems()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

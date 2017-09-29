@@ -10,9 +10,7 @@ import com.product.marcus.nearbygrocery.R
 
 import com.product.marcus.nearbygrocery.models.Result
 
-/**
- * Created by Marcus on 8/15/2017.
- */
+
 class StoreListAdapter(private val context: Context, private val data: List<Result>, private val listener: OnItemClickListener) : RecyclerView.Adapter<StoreListAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.grocery_list, null)
@@ -32,9 +30,7 @@ class StoreListAdapter(private val context: Context, private val data: List<Resu
     }
 
 
-    override fun getItemCount(): Int {
-        return data.size
-    }
+    override fun getItemCount(): Int = data.size
 
 
     interface OnItemClickListener {

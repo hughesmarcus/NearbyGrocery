@@ -1,12 +1,11 @@
 package com.product.marcus.nearbygrocery.GroceryList.list
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.widget.Button
-import android.widget.EditText
+import android.view.Menu
+import android.view.MenuItem
 import com.product.marcus.nearbygrocery.BaseActivity
 import com.product.marcus.nearbygrocery.GroceryList.additem.EditItemActivity
 import com.product.marcus.nearbygrocery.GroceryList.di.DaggerGroceryListComponent
@@ -14,16 +13,13 @@ import com.product.marcus.nearbygrocery.GroceryList.di.GroceryListContextModule
 import com.product.marcus.nearbygrocery.R
 import com.product.marcus.nearbygrocery.application.AppController
 import com.product.marcus.nearbygrocery.database.Item
-import com.product.marcus.nearbygrocery.models.Result
-import com.product.marcus.nearbygrocery.stores.storelist.StoreListAdapter
 import javax.inject.Inject
+import android.widget.Toast
+
 
 class GroceryListActivity : BaseActivity(), GroceryListView {
     @Inject lateinit var presenter: GroceryListPresenter
-
-    var taskET: EditText? = null
-    var addBtn: Button? = null
-    var recyclerView: RecyclerView? = null
+    private var recyclerView: RecyclerView? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,18 +31,14 @@ class GroceryListActivity : BaseActivity(), GroceryListView {
                 appComponent(AppController.appComponent).
                 groceryListContextModule(GroceryListContextModule(this)).
                 build().inject(this)
-        //   taskET = findViewById<EditText>(R.id.item_et) as EditText
-        addBtn = findViewById<Button>(R.id.add_btn) as Button
+
         recyclerView = findViewById<RecyclerView>(R.id.items_rv) as RecyclerView
         init()
-
-
-        addBtn?.setOnClickListener({ launchDetail() })
 
         presenter.onCreate(this)
     }
 
-    fun init() {
+    private fun init() {
         val adapter = GroceryListAdapter(applicationContext, emptyList(),
                 object : GroceryListAdapter.OnItemClickListener {
                     override fun onClick(item: Item) {
@@ -54,7 +46,7 @@ class GroceryListActivity : BaseActivity(), GroceryListView {
                     }
 
                     override fun onCheckBoxClick(item: Item) {
-                        var item1: Item = item
+
                         item.checked = !item.checked
                         presenter.updateItem(item)
                     }
@@ -65,6 +57,24 @@ class GroceryListActivity : BaseActivity(), GroceryListView {
         recyclerView?.layoutManager = LinearLayoutManager(this)
     }
 
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.grocery_list_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+
+            R.id.action_add -> Toast.makeText(this, "Add Item selected", Toast.LENGTH_SHORT)
+                    .show()
+            else -> {
+            }
+        }
+
+        return true
+    }
     fun launchDetail() {
         EditItemActivity.launch(this)
     }
@@ -82,10 +92,9 @@ class GroceryListActivity : BaseActivity(), GroceryListView {
                     }
 
                     override fun onCheckBoxClick(item: Item) {
-                        var item1: Item = item
-                        item1.checked = !item1.checked
-                        //  item.checked = !item.checked
-                        presenter.updateItem(item1)
+                        item.checked = !item.checked
+
+                        presenter.updateItem(item)
 
                     }
                 })
@@ -103,9 +112,5 @@ class GroceryListActivity : BaseActivity(), GroceryListView {
         recyclerView?.adapter?.notifyItemChanged(position)
         recyclerView?.adapter?.notifyDataSetChanged()
     }
-
-    /**
-     * Listener for clicks on tasks in the ListView.
-     */
 
 }

@@ -23,12 +23,12 @@ import kotlinx.android.synthetic.main.grocery_list.*
 
 class StoreListActivity : BaseActivity(), StoreListView {
     private lateinit var list: RecyclerView
-    lateinit var rxPermission: RxPermissions
-    lateinit var rxLocation: RxLocation
-    lateinit var presenter: StoreListPresenterImpl
-    lateinit var service: NetworkService
-    internal lateinit var progressBar: ProgressBar
-    lateinit var compositeDisposable: CompositeDisposable
+    private lateinit var rxPermission: RxPermissions
+    private lateinit var rxLocation: RxLocation
+    private lateinit var presenter: StoreListPresenterImpl
+    private lateinit var service: NetworkService
+    private lateinit var progressBar: ProgressBar
+    private lateinit var compositeDisposable: CompositeDisposable
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_store_list)
@@ -45,24 +45,29 @@ class StoreListActivity : BaseActivity(), StoreListView {
 
     }
 
-    fun renderView() {
+    override fun onDestroy() {
+        presenter.onDestroy()
+        super.onDestroy()
+    }
+
+    private fun renderView() {
         list = findViewById<RecyclerView>(R.id.activity_stations_recyclerView) as RecyclerView
         val layoutManager = LinearLayoutManager(this)
-        val dividerItemDecoration = DividerItemDecoration(list.getContext(),
-                layoutManager.getOrientation())
+        val dividerItemDecoration = DividerItemDecoration(list.context,
+                layoutManager.orientation)
         list.addItemDecoration(dividerItemDecoration)
         progressBar = findViewById<ProgressBar>(R.id.activity_stations_progressBar) as ProgressBar
     }
 
-    fun init() {
-        val adapter = StoreListAdapter(applicationContext, ArrayList<Result>(),
+    private fun init() {
+        val adapter = StoreListAdapter(applicationContext, ArrayList(),
                 object : StoreListAdapter.OnItemClickListener {
                     override fun onClick(Item: Result) {
 
                     }
                 })
-        list!!.adapter = adapter
-        list!!.layoutManager = LinearLayoutManager(this)
+        list.adapter = adapter
+        list.layoutManager = LinearLayoutManager(this)
     }
 
     fun launchDetail(result: Result) {
@@ -83,7 +88,7 @@ class StoreListActivity : BaseActivity(), StoreListView {
 
     override fun getGroceryListSuccess(placeResponse: PlaceResponse) {
         removeWait()
-        if (placeResponse != null && placeResponse.results != null && placeResponse.results!!.size > 0) {
+        if ((!(placeResponse.results != null && !placeResponse.results!!.isEmpty())).not()) {
             val adapter = StoreListAdapter(applicationContext, placeResponse.results!!,
 
                     object : StoreListAdapter.OnItemClickListener {
@@ -95,7 +100,7 @@ class StoreListActivity : BaseActivity(), StoreListView {
                         }
                     })
 
-            list!!.adapter = adapter
+            list.adapter = adapter
             adapter.notifyDataSetChanged()
         } else {
             Toast.makeText(applicationContext, "NOOOOOOOO",

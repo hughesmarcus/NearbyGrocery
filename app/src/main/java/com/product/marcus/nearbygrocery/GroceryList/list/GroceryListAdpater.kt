@@ -9,14 +9,7 @@ import android.widget.CheckBox
 import android.widget.TextView
 import com.product.marcus.nearbygrocery.R
 import com.product.marcus.nearbygrocery.database.Item
-import com.product.marcus.nearbygrocery.models.Result
-import com.product.marcus.nearbygrocery.stores.storelist.StoreListAdapter
-import android.widget.CompoundButton
 
-
-/**
- * Created by Marcus on 9/28/2017.
- */
 class GroceryListAdapter(private val context: Context, private val items: List<Item>, private val listener: OnItemClickListener) : RecyclerView.Adapter<GroceryListAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_to_do, null)
@@ -26,34 +19,32 @@ class GroceryListAdapter(private val context: Context, private val items: List<I
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.click(items[holder.getAdapterPosition()], listener)
-        holder.bind(items[holder.getAdapterPosition()], listener)
+        holder.click(items[holder.adapterPosition], listener)
+        holder.bind(items[holder.adapterPosition], listener)
 
 
 
     }
 
 
-    override fun getItemCount(): Int {
-        return items.size
-    }
+    override fun getItemCount(): Int = items.size
 
 
     interface OnItemClickListener {
         fun onClick(item: Item)
 
-        fun onCheckBoxClick(completedTask: Item)
+        fun onCheckBoxClick(item: Item)
         
         
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: Item, listener: GroceryListAdapter.OnItemClickListener) = with(itemView) {
-            val taskCb = findViewById<CheckBox>(R.id.checkBox)
+            val itemCb = findViewById<CheckBox>(R.id.checkBox)
             val name = findViewById<TextView>(R.id.name)
             name.text = item.name
-            taskCb.isChecked = item.checked
-            taskCb.setOnClickListener({
+            itemCb.isChecked = item.checked
+            itemCb.setOnClickListener({
                 listener.onCheckBoxClick(item)
             })
         }

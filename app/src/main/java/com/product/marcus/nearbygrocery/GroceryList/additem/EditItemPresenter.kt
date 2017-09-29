@@ -20,4 +20,5 @@ class EditItemPresenter {
         }.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe()
     }
+
 }
