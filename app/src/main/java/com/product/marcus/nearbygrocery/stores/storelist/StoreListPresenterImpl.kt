@@ -32,7 +32,7 @@ class StoreListPresenterImpl(private val view: StoreListView, var rxLocation: Rx
                     if (granted) {
                         val locationRequest = LocationRequest.create()
                                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                                .setInterval(500000)
+                                .setInterval(50000000)
 
                         rxLocation.location().updates(locationRequest)
                                 .flatMap({ location -> rxLocation.geocoding().fromLocation(location).toObservable() })
