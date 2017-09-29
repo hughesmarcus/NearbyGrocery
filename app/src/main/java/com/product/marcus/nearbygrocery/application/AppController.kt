@@ -27,7 +27,8 @@ class AppController : Application() {
         AppController.database = Room.databaseBuilder(this, FoodDatabase::class.java, "we-need-db").build()
         appComponent =
                 DaggerAppComponent.builder()
-                        .appContextModule(AppContextModule(this))
+                        .appContextModule(AppContextModule(context = this))
                         .build()
     }
+
 }

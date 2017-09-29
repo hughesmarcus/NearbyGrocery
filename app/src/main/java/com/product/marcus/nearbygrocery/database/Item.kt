@@ -12,11 +12,11 @@ import java.util.*
 data class Item(
         @PrimaryKey
         @ColumnInfo(name = "name") var name: String = "",
-        @ColumnInfo(name = "price") var price: String = "",
-        @ColumnInfo(name = "store") var place: String = "",
-        @ColumnInfo(name = "quantity") var quantity: String = "",
-        @ColumnInfo(name = "unit") var unit: String = "",
-        @ColumnInfo(name = "notes") var notes: String = "",
-        @ColumnInfo(name = "checked") var checked: Boolean,
-        @ColumnInfo(name = "date_added_ms") var dateMS: Long = Calendar.getInstance().timeInMillis
+        // @ColumnInfo(name = "price") var price: String = "",
+        // @ColumnInfo(name = "store") var place: String = "",
+        //  @ColumnInfo(name = "quantity") var quantity: String = "",
+        // @ColumnInfo(name = "unit") var unit: String = "",
+        //@ColumnInfo(name = "notes") var notes: String = "",
+        @ColumnInfo(name = "checked") var checked: Boolean
+        // @ColumnInfo(name = "date_added_ms") var dateMS: Long = Calendar.getInstance().timeInMillis
 )

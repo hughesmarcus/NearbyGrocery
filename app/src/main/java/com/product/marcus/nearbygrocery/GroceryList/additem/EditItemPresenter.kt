@@ -13,7 +13,7 @@ import io.reactivex.schedulers.Schedulers
 class EditItemPresenter {
 
     fun addItem(firstName: String, lastName: String) {
-        val item = Item("pizza", "4.13", "Walmart", "4", "boxes of", "no date", false)
+        val item = Item("pizza", false)
 
         Single.fromCallable {
             AppController.database?.itemDao()?.insertItem(item)
