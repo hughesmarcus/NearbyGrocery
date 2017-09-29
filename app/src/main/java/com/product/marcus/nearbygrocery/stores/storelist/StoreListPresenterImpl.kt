@@ -53,7 +53,7 @@ class StoreListPresenterImpl(private val view: StoreListView, var rxLocation: Rx
         compositeDisposable!!.add(service.getAPI().getGroceryList(location, 5000, "store", "AIzaSyA2BaZ3ue7tBn0naz2SyMI_vrXvorFKtgw")
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ PlaceResponse -> view.getGroceryListSuccess(PlaceResponse);Log.i("Mainpic", PlaceResponse.results!![0].icon) }))
+                .subscribe({ PlaceResponse -> view.getGroceryListSuccess(PlaceResponse) }))
 
     }
 

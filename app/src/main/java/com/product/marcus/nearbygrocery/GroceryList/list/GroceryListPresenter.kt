@@ -38,10 +38,21 @@ class GroceryListPresenter @Inject constructor(val itemDao: ItemDao) {
                     (items.size - 1).takeIf { it >= 0 }?.let {
                         view?.itemAddedAt(it)
                         view?.scrollTo(it)
+                        view?.itemUpdatedAt(it)
                     }
 
                 }))
         view?.showItems(items)
+
+    }
+
+    fun updateItem(item: Item) {
+        compositeDisposable.add(Observable.fromCallable { itemDao.updateItem(item) }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                }))
+
 
     }
 

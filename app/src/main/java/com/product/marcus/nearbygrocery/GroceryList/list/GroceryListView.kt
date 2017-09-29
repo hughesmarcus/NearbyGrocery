@@ -11,4 +11,6 @@ interface GroceryListView {
     fun itemAddedAt(position: Int)
 
     fun scrollTo(position: Int)
+
+    fun itemUpdatedAt(position: Int)
 }

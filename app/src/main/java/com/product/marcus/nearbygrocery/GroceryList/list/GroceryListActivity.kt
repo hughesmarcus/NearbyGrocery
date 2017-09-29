@@ -50,9 +50,17 @@ class GroceryListActivity : BaseActivity(), GroceryListView {
         val adapter = GroceryListAdapter(applicationContext, emptyList(),
                 object : GroceryListAdapter.OnItemClickListener {
                     override fun onClick(item: Item) {
-
+                        launchDetail()
                     }
+
+                    override fun onCheckBoxClick(item: Item) {
+                        var item1: Item = item
+                        item.checked = !item.checked
+                        presenter.updateItem(item)
+                    }
+
                 })
+
         recyclerView?.adapter = adapter
         recyclerView?.layoutManager = LinearLayoutManager(this)
     }
@@ -70,6 +78,14 @@ class GroceryListActivity : BaseActivity(), GroceryListView {
         recyclerView?.adapter = GroceryListAdapter(applicationContext, items,
                 object : GroceryListAdapter.OnItemClickListener {
                     override fun onClick(item: Item) {
+                        launchDetail()
+                    }
+
+                    override fun onCheckBoxClick(item: Item) {
+                        var item1: Item = item
+                        item1.checked = !item1.checked
+                        //  item.checked = !item.checked
+                        presenter.updateItem(item1)
 
                     }
                 })
@@ -82,4 +98,14 @@ class GroceryListActivity : BaseActivity(), GroceryListView {
     override fun scrollTo(position: Int) {
         recyclerView?.smoothScrollToPosition(position)
     }
+
+    override fun itemUpdatedAt(position: Int) {
+        recyclerView?.adapter?.notifyItemChanged(position)
+        recyclerView?.adapter?.notifyDataSetChanged()
+    }
+
+    /**
+     * Listener for clicks on tasks in the ListView.
+     */
+
 }
