@@ -10,7 +10,7 @@ import dagger.Provides
 @Module
 class GroceryListContextModule(internal var GroceryListContext: GroceryListActivity) {
 
-    @GroceryListScope
+    @EditItemScope
     @Provides
     internal fun provideGroceryListContext(): GroceryListActivity {
         return GroceryListContext

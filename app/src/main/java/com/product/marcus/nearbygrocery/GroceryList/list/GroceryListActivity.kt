@@ -41,7 +41,7 @@ class GroceryListActivity : BaseActivity(), GroceryListView {
         val adapter = GroceryListAdapter(applicationContext, emptyList(),
                 object : GroceryListAdapter.OnItemClickListener {
                     override fun onClick(item: Item) {
-                        launchDetail()
+                        launchEdit(item)
                     }
 
                     override fun onCheckBoxClick(item: Item) {
@@ -64,17 +64,22 @@ class GroceryListActivity : BaseActivity(), GroceryListView {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val newitem: Item = Item()
         when (item.itemId) {
 
-            R.id.action_add -> Toast.makeText(this, "Add Item selected", Toast.LENGTH_SHORT)
-                    .show()
+            R.id.action_add -> launchAdd()
             else -> {
             }
         }
 
         return true
     }
-    fun launchDetail() {
+
+    fun launchEdit(item: Item) {
+        EditItemActivity.launch(this, item)
+    }
+
+    fun launchAdd() {
         EditItemActivity.launch(this)
     }
 
@@ -87,7 +92,7 @@ class GroceryListActivity : BaseActivity(), GroceryListView {
         recyclerView?.adapter = GroceryListAdapter(applicationContext, items,
                 object : GroceryListAdapter.OnItemClickListener {
                     override fun onClick(item: Item) {
-                        launchDetail()
+                        launchEdit(item)
                     }
 
                     override fun onCheckBoxClick(item: Item) {

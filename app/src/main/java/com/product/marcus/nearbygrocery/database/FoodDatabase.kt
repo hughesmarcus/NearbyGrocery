@@ -6,7 +6,7 @@ import android.arch.persistence.room.RoomDatabase
 /**
  * Created by Marcus on 9/25/2017.
  */
-@Database(entities = arrayOf(Item::class), version = 1)
+@Database(entities = arrayOf(Item::class), version = 2)
 abstract class FoodDatabase : RoomDatabase() {
     abstract fun itemDao(): ItemDao
 }

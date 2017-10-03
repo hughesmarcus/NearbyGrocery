@@ -1,14 +1,7 @@
 package com.product.marcus.nearbygrocery.GroceryList.di
 
-import android.arch.persistence.room.Room
-import android.content.Context
-import com.product.marcus.nearbygrocery.GroceryList.list.GroceryListActivity
 import com.product.marcus.nearbygrocery.GroceryList.list.GroceryListPresenter
-import com.product.marcus.nearbygrocery.GroceryList.list.GroceryListView
-import com.product.marcus.nearbygrocery.application.AppComponent
 import com.product.marcus.nearbygrocery.application.AppController
-import com.product.marcus.nearbygrocery.database.FoodDatabase
-import com.product.marcus.nearbygrocery.database.ItemDao
 import dagger.Module
 import dagger.Provides
 
@@ -17,7 +10,7 @@ import dagger.Provides
  */
 @Module
 class GroceryListModule {
-    @GroceryListScope
+    @EditItemScope
     @Provides
     fun providePresenter(): GroceryListPresenter {
         //val compositeSubscription = CompositeSubscription()

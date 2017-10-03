@@ -54,11 +54,4 @@ class GroceryListPresenter @Inject constructor(val itemDao: ItemDao) {
 
     }
 
-    fun addNewItem(name: String) {
-        val newitem = Item(name = name, checked = false)
-        compositeDisposable.add(Observable.fromCallable { itemDao.insertItem(newitem) }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe())
-    }
 }
