@@ -43,4 +43,10 @@ open class BaseActivity : AppCompatActivity() {
 
     }
 
+    fun intNav() {
+        val navigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        navigation!!.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+    }
+
+
 }

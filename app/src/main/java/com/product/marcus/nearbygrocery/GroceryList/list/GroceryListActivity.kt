@@ -25,8 +25,7 @@ class GroceryListActivity : BaseActivity(), GroceryListView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_grocery_list)
-        val navigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        navigation!!.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        intNav()
         DaggerGroceryListComponent.builder().
                 appComponent(AppController.appComponent).
                 groceryListContextModule(GroceryListContextModule(this)).

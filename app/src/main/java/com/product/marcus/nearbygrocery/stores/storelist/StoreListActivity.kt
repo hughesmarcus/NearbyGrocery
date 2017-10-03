@@ -32,8 +32,7 @@ class StoreListActivity : BaseActivity(), StoreListView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_store_list)
-        val navigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        navigation!!.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        intNav()
         compositeDisposable = CompositeDisposable()
         rxPermission = RxPermissions(this)
         rxLocation = RxLocation(this)
