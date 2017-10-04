@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.product.marcus.nearbygrocery.GroceryList.additem.EditItemActivity">
+    tools:context=".ui.groceryList.additem.EditItemActivity">
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.product.marcus.nearbygrocery.stores.storelist.StoreListActivity">
+    tools:context="com.product.marcus.nearbygrocery.ui.stores.storelist.StoreListActivity">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/activity_stations_recyclerView"
         android:layout_width="match_parent"

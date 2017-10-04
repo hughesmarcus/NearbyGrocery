@@ -20,7 +20,7 @@
             android:value="AIzaSyBkTm63dmUG6QeLxt3owh-AMuoIP9SPg8A" />
 
         <activity
-            android:name=".stores.storelist.StoreListActivity"
+            android:name="com.product.marcus.nearbygrocery.ui.stores.storelist.StoreListActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,19 +29,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".stores.storedetail.StoreDetailActivity"
+            android:name="com.product.marcus.nearbygrocery.ui.stores.storedetail.StoreDetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".BaseActivity"
+            android:name=".ui.BaseActivity"
             android:label="@string/title_activity_base" />
         <activity
-            android:name=".GroceryList.list.GroceryListActivity"
+            android:name=".ui.groceryList.list.GroceryListActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".GroceryList.additem.EditItemActivity"
+            android:name=".ui.groceryList.additem.EditItemActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Pantry.PantryListActivity"
+            android:name="com.product.marcus.nearbygrocery.ui.pantry.PantryListActivity"
             android:screenOrientation="portrait"></activity>
     </application>
 
