@@ -48,7 +48,7 @@ class StoreListPresenterImpl(private val view: StoreListView, private var rxLoca
 
         val location = lat.toString() + "," + lon.toString()
         compositeDisposable!!.add(service.getAPI().getGroceryList(location, 5000, "store", "AIzaSyBkTm63dmUG6QeLxt3owh-AMuoIP9SPg8A")
-                .subscribeOn(Schedulers.computation())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ PlaceResponse -> view.getGroceryListSuccess(PlaceResponse) }))
 
