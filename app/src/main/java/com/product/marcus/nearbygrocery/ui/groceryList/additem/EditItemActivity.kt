@@ -20,7 +20,7 @@ class EditItemActivity : BaseActivity(), EditItemView {
     lateinit var item: Item
     var new: Boolean = false
     var minteger = 0
-    lateinit var displayInteger: EditText
+    private lateinit var displayInteger: EditText
 
     companion object {
         private val IT = "item"
@@ -38,14 +38,15 @@ class EditItemActivity : BaseActivity(), EditItemView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_item)
+
         intNav()
-        displayInteger = findViewById<EditText>(
+        displayInteger = findViewById(
                 R.id.amount)
         DaggerEditItemComponent.builder().
                 appComponent(AppController.appComponent).
                 editItemContextModule(EditItemContextModule(this)).
                 build().inject(this)
-        if (getIntent().hasExtra(IT)) {
+        if (intent.hasExtra(IT)) {
             item = intent.getParcelableExtra(IT)
             new = false
         } else {
@@ -57,52 +58,45 @@ class EditItemActivity : BaseActivity(), EditItemView {
         minteger = item.quantity
         intVal()
         intButtons()
-        presenter.onCreate(this)
+        presenter.view = this
 
     }
 
-    fun intButtons() {
-        if (getIntent().hasExtra(IT)) {
-            save.setOnClickListener(object : View.OnClickListener {
-                override fun onClick(v: View) {
-                    item.name = item_name.text.toString()
-                    item.category = category.text.toString()
-                    item.notes = notes.text.toString()
-                    item.price = price.text.toString().toDouble()
-                    item.quantity = amount.text.toString().toInt()
-                    item.store = ""
-                    item.unit = units.text.toString()
-                    presenter.updateItem(item)
-                    finish()
-                }
-            })
+    private fun intButtons() {
+        if (intent.hasExtra(IT)) {
+            save.setOnClickListener {
+                item.name = item_name.text.toString()
+                item.category = category.text.toString()
+                item.notes = notes.text.toString()
+                item.price = price.text.toString().toDouble()
+                item.quantity = amount.text.toString().toInt()
+                item.store = ""
+                item.unit = units.text.toString()
+                presenter.updateItem(item)
+                finish()
+            }
         } else {
-            save.setOnClickListener(object : View.OnClickListener {
-                override fun onClick(v: View) {
-                    item.name = item_name.text.toString()
-                    item.category = category.text.toString()
-                    item.notes = notes.text.toString()
-                    item.price = price.text.toString().toDouble()
-                    item.quantity = amount.text.toString().toInt()
-                    item.store = ""
-                    item.unit = units.text.toString()
-                    item.checked = false
-                    presenter.addItem(item)
-                    finish()
-                }
-            })
+            save.setOnClickListener {
+                item.name = item_name.text.toString()
+                item.category = category.text.toString()
+                item.notes = notes.text.toString()
+                item.price = price.text.toString().toDouble()
+                item.quantity = amount.text.toString().toInt()
+                item.store = ""
+                item.unit = units.text.toString()
+                item.checked = false
+                presenter.addItem(item)
+                finish()
+            }
         }
 
-        delete.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View) {
-                presenter.deleteItem(item)
-                finish()
-
-            }
-        })
+        delete.setOnClickListener {
+            presenter.deleteItem(item)
+            finish()
+        }
     }
 
-    fun intVal() {
+    private fun intVal() {
 
         val editable = SpannableStringBuilder("" + item.quantity)
         displayInteger.text = editable
@@ -118,13 +112,13 @@ class EditItemActivity : BaseActivity(), EditItemView {
     }
 
     fun increaseInteger(view: View) {
-        minteger = minteger + 1
+        minteger += 1
         display(minteger)
 
     }
 
     fun decreaseInteger(view: View) {
-        minteger = minteger - 1
+        minteger -= 1
         display(minteger)
     }
 
@@ -134,7 +128,12 @@ class EditItemActivity : BaseActivity(), EditItemView {
     }
 
     override fun onDestroy() {
-        presenter.onDestroy()
+        presenter.compositeDisposable.dispose()
+        presenter.view = null
         super.onDestroy()
+    }
+
+    override fun onFailure(appErrorMessage: String) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

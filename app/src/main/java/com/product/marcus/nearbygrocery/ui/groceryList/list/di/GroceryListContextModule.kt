@@ -12,9 +12,7 @@ class GroceryListContextModule(internal var GroceryListContext: GroceryListActiv
 
     @GroceryListScope
     @Provides
-    internal fun provideGroceryListContext(): GroceryListActivity {
-        return GroceryListContext
-    }
+    internal fun provideGroceryListContext(): GroceryListActivity = GroceryListContext
 
 
 }

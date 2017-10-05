@@ -9,7 +9,6 @@ interface StoreListView {
 
     fun showWait()
     fun removeWait()
-
     fun onFailure(appErrorMessage: String)
     fun getGroceryListSuccess(placeResponse: PlaceResponse)
 }

@@ -10,9 +10,7 @@ class EditItemContextModule(internal var EditItemContext: EditItemActivity) {
 
     @EditItemScope
     @Provides
-    internal fun provideEditItemContext(): EditItemActivity {
-        return EditItemContext
-    }
+    internal fun provideEditItemContext(): EditItemActivity = EditItemContext
 
 
 }

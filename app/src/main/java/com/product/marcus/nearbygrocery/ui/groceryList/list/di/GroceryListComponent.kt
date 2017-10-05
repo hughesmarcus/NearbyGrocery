@@ -10,7 +10,7 @@ import dagger.Component
  */
 @GroceryListScope
 @Component(modules = arrayOf(GroceryListContextModule::class, GroceryListModule::class), dependencies = arrayOf(AppComponent::class))
-public interface GroceryListComponent {
+interface GroceryListComponent {
 
     fun inject(activity: GroceryListActivity)
 }

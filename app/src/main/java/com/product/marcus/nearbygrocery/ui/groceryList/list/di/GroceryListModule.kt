@@ -14,8 +14,8 @@ class GroceryListModule {
     @GroceryListScope
     @Provides
     fun providePresenter(): GroceryListPresenter {
-        val compositeSubscription = CompositeDisposable()
-        return GroceryListPresenter(AppController.database!!.itemDao())
+        val compositeDisposable = CompositeDisposable()
+        return GroceryListPresenter(AppController.database!!.itemDao(), compositeDisposable)
     }
 
 

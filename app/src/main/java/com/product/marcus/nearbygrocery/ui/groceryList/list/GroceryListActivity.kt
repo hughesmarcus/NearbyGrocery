@@ -31,8 +31,8 @@ class GroceryListActivity : BaseActivity(), GroceryListView {
 
         recyclerView = findViewById<RecyclerView>(R.id.items_rv) as RecyclerView
         init()
-
-        presenter.onCreate(this)
+        presenter.view = this
+        presenter.loadItems()
     }
 
     private fun init() {
@@ -82,7 +82,8 @@ class GroceryListActivity : BaseActivity(), GroceryListView {
     }
 
     override fun onDestroy() {
-        presenter.onDestroy()
+        presenter.compositeDisposable.dispose()
+        presenter.view = null
         super.onDestroy()
     }
 
@@ -113,6 +114,10 @@ class GroceryListActivity : BaseActivity(), GroceryListView {
     override fun itemUpdatedAt(position: Int) {
         recyclerView?.adapter?.notifyItemChanged(position)
         recyclerView?.adapter?.notifyDataSetChanged()
+    }
+
+    override fun onFailure(appErrorMessage: String) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 }

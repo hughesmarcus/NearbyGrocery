@@ -9,24 +9,13 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 
-class GroceryListPresenter @Inject constructor(val itemDao: ItemDao) {
+class GroceryListPresenter @Inject constructor(val itemDao: ItemDao, val compositeDisposable: CompositeDisposable) {
 
-    val compositeDisposable = CompositeDisposable()
     var items = ArrayList<Item>()
 
     var view: GroceryListView? = null
 
-    fun onCreate(groceryListView: GroceryListView) {
-        view = groceryListView
-        loadItems()
-    }
-
-    fun onDestroy() {
-        compositeDisposable.dispose()
-        view = null
-    }
-
-    private fun loadItems() {
+    fun loadItems() {
         compositeDisposable.add(itemDao.getAllItems()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

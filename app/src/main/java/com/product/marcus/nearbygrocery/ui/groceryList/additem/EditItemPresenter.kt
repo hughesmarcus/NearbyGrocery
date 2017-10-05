@@ -11,20 +11,10 @@ import javax.inject.Inject
 /**
  * Created by Marcus on 9/27/2017.
  */
-class EditItemPresenter @Inject constructor(val itemDao: ItemDao) {
-    val compositeDisposable = CompositeDisposable()
+class EditItemPresenter @Inject constructor(val itemDao: ItemDao, val compositeDisposable: CompositeDisposable) {
+
 
     var view: EditItemView? = null
-
-    fun onCreate(editItemView: EditItemView) {
-        view = editItemView
-
-    }
-
-    fun onDestroy() {
-        compositeDisposable.dispose()
-        view = null
-    }
 
     fun addItem(item: Item) {
 

@@ -81,7 +81,8 @@ class StoreListActivity : BaseActivity(), StoreListView {
     }
 
     override fun onFailure(appErrorMessage: String) {
-
+        Toast.makeText(applicationContext, appErrorMessage,
+                Toast.LENGTH_LONG).show()
     }
 
     override fun getGroceryListSuccess(placeResponse: PlaceResponse) {

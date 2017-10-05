@@ -14,7 +14,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 
-class StoreListPresenterImpl(private val view: StoreListView, private var rxLocation: RxLocation,
+class StoreListPresenterImpl(private var view: StoreListView?, private var rxLocation: RxLocation,
                              private var permission: RxPermissions, private var service: NetworkService) : StoreListPresenter {
     private var compositeDisposable: CompositeDisposable? = null
 
@@ -47,14 +47,16 @@ class StoreListPresenterImpl(private val view: StoreListView, private var rxLoca
     override fun getGroceryLocations(lat: Double, lon: Double) {
 
         val location = lat.toString() + "," + lon.toString()
-        compositeDisposable!!.add(service.getAPI().getGroceryList(location, 5000, "store", "AIzaSyBkTm63dmUG6QeLxt3owh-AMuoIP9SPg8A")
+        compositeDisposable?.add(service.getAPI().getGroceryList(location, 5000, "store", "AIzaSyBkTm63dmUG6QeLxt3owh-AMuoIP9SPg8A")
                 .subscribeOn(Schedulers.io())
+                .doOnError { error -> view?.onFailure(error.localizedMessage) }
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ PlaceResponse -> view.getGroceryListSuccess(PlaceResponse) }))
+                .subscribe({ PlaceResponse -> view?.getGroceryListSuccess(PlaceResponse) }))
 
     }
 
     override fun onDestroy() {
         compositeDisposable?.dispose()
+        view = null
     }
 }

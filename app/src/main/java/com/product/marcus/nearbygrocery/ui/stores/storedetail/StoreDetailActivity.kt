@@ -11,7 +11,7 @@ import com.product.marcus.nearbygrocery.R
 import com.product.marcus.nearbygrocery.models.Result
 import kotlinx.android.synthetic.main.activity_store_detail.*
 
-class StoreDetailActivity : BaseActivity() {
+class StoreDetailActivity : BaseActivity(), StoreDetailView {
     lateinit var result: Result
     private lateinit var list: RecyclerView
     companion object {
@@ -49,6 +49,10 @@ class StoreDetailActivity : BaseActivity() {
 
         list!!.adapter = adapter
         list!!.layoutManager = LinearLayoutManager(this)
+    }
+
+    override fun onFailure(appErrorMessage: String) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
 

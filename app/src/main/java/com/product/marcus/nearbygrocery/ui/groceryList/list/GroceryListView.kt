@@ -11,4 +11,6 @@ interface GroceryListView {
     fun scrollTo(position: Int)
 
     fun itemUpdatedAt(position: Int)
+
+    fun onFailure(appErrorMessage: String)
 }

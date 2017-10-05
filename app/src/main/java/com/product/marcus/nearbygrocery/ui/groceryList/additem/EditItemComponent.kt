@@ -12,7 +12,7 @@ import dagger.Component
  */
 @EditItemScope
 @Component(modules = arrayOf(EditItemContextModule::class, EditItemModule::class), dependencies = arrayOf(AppComponent::class))
-public interface EditItemComponent {
+interface EditItemComponent {
 
     fun inject(activity: EditItemActivity)
 }
