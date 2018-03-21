@@ -7,6 +7,7 @@ import okhttp3.OkHttpClient
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import dagger.Module
 import okhttp3.Cache
+
 import okhttp3.logging.HttpLoggingInterceptor
 import java.io.File
 
